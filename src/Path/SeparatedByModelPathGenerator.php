@@ -8,35 +8,32 @@ use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 
 class SeparatedByModelPathGenerator implements PathGenerator
 {
-
     public function getPath(Media $media): string
     {
-        return $this->getBasePath($media) . '/';
+        return $this->getBasePath($media).'/';
     }
 
     public function getPathForConversions(Media $media): string
     {
-        return $this->getBasePath($media) . '/conversions/';
+        return $this->getBasePath($media).'/conversions/';
     }
 
     public function getPathForResponsiveImages(Media $media): string
     {
-        return $this->getBasePath($media) . '/responsive-images/';
+        return $this->getBasePath($media).'/responsive-images/';
     }
 
     protected function getBasePath(Media $media): string
     {
 
-        $collection_path = $media->collection_name === 'default' ? '' : $media->collection_name . '/';
+        $collection_path = $media->collection_name === 'default' ? '' : $media->collection_name.'/';
 
         $modelType = Str::of($media->getMorphClass())
-            ->explode("\\")
+            ->explode('\\')
             ->last();
-        
-        $modelType = mb_strtolower($modelType);
 
+        $modelType = mb_strtolower($modelType);
 
         return "$modelType/$collection_path{$media->model_id}/{$media->getKey()}";
     }
-
 }
