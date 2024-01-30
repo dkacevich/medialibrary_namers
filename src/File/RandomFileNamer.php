@@ -15,7 +15,7 @@ class RandomFileNamer extends FileNamer
     {
         $pathInfo = pathinfo($fileName, PATHINFO_FILENAME);
 
-        $position = $pathInfo . bin2hex(random_bytes(10));
+        $position = $pathInfo.bin2hex(random_bytes(10));
 
         return md5($position);
     }
